@@ -38,6 +38,7 @@ class Product < ApplicationRecord
 
   private
 
+  # metodo não deixa o preço de venda ser menor que o preço de custo
   def price_must_be_greater_than_or_equal_to_cost
     return if cost_price.blank? || price.blank?
 

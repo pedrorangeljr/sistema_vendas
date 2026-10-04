@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1>
+      <%= @product.name %>
+    </h1>
+    <p class="text-muted mb-0">
+      Detalhes do produto
+    </p>
+  </div>
+  <div>
+    <%= link_to "Editar",
+                edit_product_path(@product),
+                class: "btn btn-primary" %>
+    <%= link_to "Voltar",
+                products_path,
+                class: "btn btn-secondary" %>
+  </div>
+</div>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <dl class="row">
+      <dt class="col-sm-3">Nome</dt>
+      <dd class="col-sm-9">
+        <%= @product.name %>
+      </dd>
+      <dt class="col-sm-3">SKU</dt>
+      <dd class="col-sm-9">
+        <%= @product.sku %>
+      </dd>
+      <dt class="col-sm-3">Categoria</dt>
+      <dd class="col-sm-9">
+        <%= @product.category.name %>
+      </dd>
+      <dt class="col-sm-3">Descrição</dt>
+      <dd class="col-sm-9">
+        <%= @product.description.presence || "Não informado" %>
+      </dd>
+      <dt class="col-sm-3">Preço de custo</dt>
+      <dd class="col-sm-9">
+        R$ <%= number_with_precision(
+          @product.cost_price,
+          precision: 2
+        ) %>
+      </dd>
+      <dt class="col-sm-3">Preço de venda</dt>
+      <dd class="col-sm-9">
+        R$ <%= number_with_precision(
+          @product.price,
+          precision: 2
+        ) %>
+      </dd>
+      <dt class="col-sm-3">Estoque</dt>
+      <dd class="col-sm-9">
+        <%= @product.stock_quantity %> unidades
+      </dd>
+      <dt class="col-sm-3">Estoque mínimo</dt>
+      <dd class="col-sm-9">
+        <%= @product.minimum_stock %> unidades
+      </dd>
+      <dt class="col-sm-3">Status</dt>
+      <dd class="col-sm-9">
+        <% if @product.active? %>
+          <span class="badge text-bg-success">
+            Ativo
+          </span>
+        <% else %>
+          <span class="badge text-bg-secondary">
+            Inativo
+          </span>
+        <% end %>
+      </dd>
+    </dl>
+  </div>
+</div>

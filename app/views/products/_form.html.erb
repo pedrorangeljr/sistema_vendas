@@ -1,0 +1,100 @@
+<%= form_with model: product do |form| %>
+  <% if product.errors.any? %>
+    <div class="alert alert-danger">
+      <h5>
+        Corrija os seguintes erros:
+      </h5>
+      <ul>
+        <% product.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="mb-3">
+    <%= form.label :category_id,
+                   "Categoria",
+                   class: "form-label" %>
+    <%= form.collection_select :category_id,
+                               categories,
+                               :id,
+                               :name,
+                               { prompt: "Selecione uma categoria" },
+                               { class: "form-select" } %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :name,
+                   "Nome",
+                   class: "form-label" %>
+    <%= form.text_field :name,
+                        class: "form-control",
+                        autofocus: true %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :sku,
+                   "SKU",
+                   class: "form-label" %>
+    <%= form.text_field :sku,
+                        class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :description,
+                   "Descrição",
+                   class: "form-label" %>
+    <%= form.text_area :description,
+                       class: "form-control",
+                       rows: 4 %>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= form.label :cost_price,
+                     "Preço de custo",
+                     class: "form-label" %>
+      <%= form.number_field :cost_price,
+                            step: "0.01",
+                            min: 0,
+                            class: "form-control" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :price,
+                     "Preço de venda",
+                     class: "form-label" %>
+      <%= form.number_field :price,
+                            step: "0.01",
+                            min: 0,
+                            class: "form-control" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= form.label :stock_quantity,
+                     "Quantidade em estoque",
+                     class: "form-label" %>
+      <%= form.number_field :stock_quantity,
+                            min: 0,
+                            class: "form-control" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :minimum_stock,
+                     "Estoque mínimo",
+                     class: "form-label" %>
+      <%= form.number_field :minimum_stock,
+                            min: 0,
+                            class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-check mb-4">
+    <%= form.check_box :active,
+                       class: "form-check-input" %>
+    <%= form.label :active,
+                   "Produto ativo",
+                   class: "form-check-label" %>
+  </div>
+  <%= form.submit "Salvar",
+                  class: "btn btn-primary" %>
+  <%= link_to "Cancelar",
+              products_path,
+              class: "btn btn-secondary" %>
+<% end %>

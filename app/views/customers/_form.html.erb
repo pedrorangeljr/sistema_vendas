@@ -58,14 +58,18 @@
                      "CEP",
                      class: "form-label" %>
       <%= form.text_field :zip_code,
-                          class: "form-control" %>
+    class: "form-control",
+    placeholder: "00000-000",
+    maxlength: 9,
+    onblur: "buscarCep(this.value)" %>
     </div>
     <div class="col-md-7 mb-3">
       <%= form.label :street,
                      "Logradouro",
                      class: "form-label" %>
       <%= form.text_field :street,
-                          class: "form-control" %>
+            class: "form-control",
+            id: "customer_street" %>
     </div>
     <div class="col-md-2 mb-3">
       <%= form.label :number,
@@ -88,14 +92,16 @@
                      "Bairro",
                      class: "form-label" %>
       <%= form.text_field :neighborhood,
-                          class: "form-control" %>
+            class: "form-control",
+            id: "customer_neighborhood" %>
     </div>
     <div class="col-md-4 mb-3">
       <%= form.label :city,
                      "Cidade",
                      class: "form-label" %>
       <%= form.text_field :city,
-                          class: "form-control" %>
+                          class: "form-control",
+                          id: "customer_city" %>
     </div>
   </div>
   <div class="row">
@@ -105,7 +111,8 @@
                      class: "form-label" %>
       <%= form.text_field :state,
                           maxlength: 2,
-                          class: "form-control" %>
+                          class: "form-control",
+                          id: "customer_state" %>
     </div>
   </div>
   <div class="form-check mb-4">

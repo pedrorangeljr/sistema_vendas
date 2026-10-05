@@ -1,0 +1,123 @@
+<%= form_with model: customer do |form| %>
+  <% if customer.errors.any? %>
+    <div class="alert alert-danger">
+      <h5>Corrija os seguintes erros:</h5>
+      <ul class="mb-0">
+        <% customer.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <h5 class="mb-3">
+    Dados pessoais
+  </h5>
+  <div class="row">
+    <div class="col-md-8 mb-3">
+      <%= form.label :name,
+                     "Nome",
+                     class: "form-label" %>
+      <%= form.text_field :name,
+                          class: "form-control",
+                          autofocus: true %>
+    </div>
+    <div class="col-md-4 mb-3">
+      <%= form.label :cpf,
+                     "CPF",
+                     class: "form-label" %>
+      <%= form.text_field :cpf,
+                          class: "form-control",
+                          placeholder: "000.000.000-00" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-7 mb-3">
+      <%= form.label :email,
+                     "E-mail",
+                     class: "form-label" %>
+      <%= form.email_field :email,
+                           class: "form-control" %>
+    </div>
+    <div class="col-md-5 mb-3">
+      <%= form.label :phone,
+                     "Telefone",
+                     class: "form-label" %>
+      <%= form.telephone_field :phone,
+                               class: "form-control" %>
+    </div>
+  </div>
+  <hr>
+  <h5 class="mb-3">
+    Endereço
+  </h5>
+  <div class="row">
+    <div class="col-md-3 mb-3">
+      <%= form.label :zip_code,
+                     "CEP",
+                     class: "form-label" %>
+      <%= form.text_field :zip_code,
+                          class: "form-control" %>
+    </div>
+    <div class="col-md-7 mb-3">
+      <%= form.label :street,
+                     "Logradouro",
+                     class: "form-label" %>
+      <%= form.text_field :street,
+                          class: "form-control" %>
+    </div>
+    <div class="col-md-2 mb-3">
+      <%= form.label :number,
+                     "Número",
+                     class: "form-label" %>
+      <%= form.text_field :number,
+                          class: "form-control" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <%= form.label :complement,
+                     "Complemento",
+                     class: "form-label" %>
+      <%= form.text_field :complement,
+                          class: "form-control" %>
+    </div>
+    <div class="col-md-4 mb-3">
+      <%= form.label :neighborhood,
+                     "Bairro",
+                     class: "form-label" %>
+      <%= form.text_field :neighborhood,
+                          class: "form-control" %>
+    </div>
+    <div class="col-md-4 mb-3">
+      <%= form.label :city,
+                     "Cidade",
+                     class: "form-label" %>
+      <%= form.text_field :city,
+                          class: "form-control" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 mb-3">
+      <%= form.label :state,
+                     "Estado",
+                     class: "form-label" %>
+      <%= form.text_field :state,
+                          maxlength: 2,
+                          class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-check mb-4">
+    <%= form.check_box :active,
+                       class: "form-check-input" %>
+    <%= form.label :active,
+                   "Cliente ativo",
+                   class: "form-check-label" %>
+  </div>
+  <%= form.submit "Salvar",
+                  class: "btn btn-primary" %>
+  <%= link_to "Cancelar",
+              customers_path,
+              class: "btn btn-secondary" %>
+<% end %>

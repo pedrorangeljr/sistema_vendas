@@ -1,7 +1,7 @@
 class Customer < ApplicationRecord
   has_many :sales, dependent: :restrict_with_error
 
-  before_action :normalize_data
+  before_validation :normalize_data
 
   validates :name, presence: true
 

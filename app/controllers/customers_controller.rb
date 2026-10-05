@@ -3,6 +3,7 @@ class CustomersController < ApplicationController
     @customers = Customer.ordered
 
     if params[:search].present?
+      search = "%#{params[:search]}%"
 
       @customers = @customers.where(
         "name ILIKE :search
@@ -31,9 +32,11 @@ class CustomersController < ApplicationController
     @customer = Customer.new(customer_params)
 
     if @customer.save
-      redirect_to customers_path, notice: 'Cliente criado com cucesso.'
+      redirect_to customers_path,
+                  notice: 'Cliente criado com sucesso.'
     else
-      render :new, status: :unprocessable_entity
+      render :new,
+             status: :unprocessable_entity
     end
   end
 

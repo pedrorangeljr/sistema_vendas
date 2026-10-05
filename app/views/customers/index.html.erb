@@ -1,0 +1,117 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1>Clientes</h1>
+    <p class="text-muted mb-0">
+      Gerenciamento de clientes
+    </p>
+  </div>
+  <%= link_to "Novo Cliente",
+              new_customer_path,
+              class: "btn btn-primary" %>
+</div>
+<div class="card shadow-sm mb-4">
+  <div class="card-body">
+    <%= form_with url: customers_path,
+                  method: :get,
+                  local: true do |form| %>
+      <div class="row g-2">
+        <div class="col-md-7">
+          <%= form.text_field :search,
+                              value: params[:search],
+                              class: "form-control",
+                              placeholder: "Nome, CPF ou e-mail..." %>
+        </div>
+        <div class="col-md-3">
+          <%= form.select :status,
+                          [
+                            ["Todos", ""],
+                            ["Ativos", "active"],
+                            ["Inativos", "inactive"]
+                          ],
+                          { selected: params[:status] },
+                          { class: "form-select" } %>
+        </div>
+        <div class="col-md-2">
+          <%= form.submit "Pesquisar",
+                          class: "btn btn-outline-primary w-100" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <% if @customers.any? %>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th>E-mail</th>
+              <th>Telefone</th>
+              <th>Status</th>
+              <th class="text-end">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @customers.each do |customer| %>
+              <tr>
+                <td>
+                  <strong>
+                    <%= customer.name %>
+                  </strong>
+                </td>
+                <td>
+                  <%= customer.cpf %>
+                </td>
+                <td>
+                  <%= customer.email || "-" %>
+                </td>
+                <td>
+                  <%= customer.phone || "-" %>
+                </td>
+                <td>
+                  <% if customer.active? %>
+                    <span class="badge text-bg-success">
+                      Ativo
+                    </span>
+                  <% else %>
+                    <span class="badge text-bg-secondary">
+                      Inativo
+                    </span>
+                  <% end %>
+                </td>
+                <td class="text-end">
+                  <%= link_to "Visualizar",
+                              customer_path(customer),
+                              class: "btn btn-sm btn-outline-primary" %>
+                  <%= link_to "Editar",
+                              edit_customer_path(customer),
+                              class: "btn btn-sm btn-outline-secondary" %>
+                  <%= link_to "Excluir",
+                              customer_path(customer),
+                              data: {
+                                turbo_method: :delete,
+                                turbo_confirm: "Deseja realmente excluir este cliente?"
+                              },
+                              class: "btn btn-sm btn-outline-danger" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="text-center py-5">
+        <h4>Nenhum cliente encontrado</h4>
+        <p class="text-muted">
+          Cadastre o primeiro cliente.
+        </p>
+        <%= link_to "Novo Cliente",
+                    new_customer_path,
+                    class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
